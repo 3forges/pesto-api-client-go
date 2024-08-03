@@ -73,8 +73,9 @@ func (c *Client) GetPestoProjectIngredients(PestoProjectID string) ([]Ingredient
 
 */
 // CreatePestoProject - Create new PestoProject
-func (c *Client) CreatePestoProject(project PestoProject, authToken *string) (*PestoProject, error) {
+func (c *Client) CreatePestoProject(project CreatePestoProjectPayload, authToken *string) (*PestoProject, error) {
 	rb, err := json.Marshal(project)
+
 	if err != nil {
 		return nil, err
 	}
