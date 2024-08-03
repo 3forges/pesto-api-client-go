@@ -53,12 +53,12 @@ func NewClient(host, username, password *string) (*Client, error) {
 		Password: *password,
 	}
 
-	ar, err := c.SignIn()
-	if err != nil {
-		return nil, err
-	}
+	//ar, err := c.SignIn()
+	//if err != nil {
+	//	return nil, err
+	//}
 
-	c.Token = ar.Token
+	//c.Token = ar.Token
 
 	return &c, nil
 }
