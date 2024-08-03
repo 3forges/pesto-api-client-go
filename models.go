@@ -3,7 +3,7 @@ package pesto
 
 // PestoProject -
 type PestoProject struct {
-	ID                   int       `json:"_id"`
+	ID                   string    `json:"_id"`
 	Name                 string    `json:"name"`
 	Description          string    `json:"description"`
 	Git_ssh_uri          string    `json:"git_ssh_uri"`
