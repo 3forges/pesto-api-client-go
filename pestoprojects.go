@@ -29,24 +29,24 @@ func (c *Client) GetPestoProjects() ([]PestoProject, error) {
 }
 
 // GetPestoProject - Returns specific PestoProject (no auth required)
-func (c *Client) GetPestoProject(PestoProjectID string) ([]PestoProject, error) {
+func (c *Client) GetPestoProject(PestoProjectID string) (PestoProject, error) {
 	req, err := http.NewRequest("GET", fmt.Sprintf("%s/pesto-project/%s", c.HostURL, PestoProjectID), nil)
 	if err != nil {
-		return nil, err
+		return PestoProject{}, err
 	}
 
 	body, err := c.doRequest(req, nil)
 	if err != nil {
-		return nil, err
+		return PestoProject{}, err
 	}
 
-	PestoProjects := []PestoProject{}
-	err = json.Unmarshal(body, &PestoProjects)
+	returnedPestoProject := PestoProject{}
+	err = json.Unmarshal(body, &returnedPestoProject)
 	if err != nil {
-		return nil, err
+		return PestoProject{}, err
 	}
 
-	return PestoProjects, nil
+	return returnedPestoProject, nil
 }
 
 /*
