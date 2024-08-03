@@ -9,7 +9,7 @@ import (
 
 // GetPestoProjects - Returns list of PestoProjects (no auth required)
 func (c *Client) GetPestoProjects() ([]PestoProject, error) {
-	req, err := http.NewRequest("GET", fmt.Sprintf("%s/PestoProjects", c.HostURL), nil)
+	req, err := http.NewRequest("GET", fmt.Sprintf("%s/pesto-project", c.HostURL), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -30,7 +30,7 @@ func (c *Client) GetPestoProjects() ([]PestoProject, error) {
 
 // GetPestoProject - Returns specific PestoProject (no auth required)
 func (c *Client) GetPestoProject(PestoProjectID string) ([]PestoProject, error) {
-	req, err := http.NewRequest("GET", fmt.Sprintf("%s/PestoProjects/%s", c.HostURL, PestoProjectID), nil)
+	req, err := http.NewRequest("GET", fmt.Sprintf("%s/pesto-project/%s", c.HostURL, PestoProjectID), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -79,7 +79,7 @@ func (c *Client) CreatePestoProject(project PestoProject, authToken *string) (*P
 		return nil, err
 	}
 
-	req, err := http.NewRequest("POST", fmt.Sprintf("%s/PestoProjects", c.HostURL), strings.NewReader(string(rb)))
+	req, err := http.NewRequest("POST", fmt.Sprintf("%s/pesto-project", c.HostURL), strings.NewReader(string(rb)))
 	if err != nil {
 		return nil, err
 	}
