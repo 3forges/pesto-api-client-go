@@ -94,45 +94,5 @@ func (c *Client) CreatePestoProject(project PestoProject, authToken *string) (*P
 	if err != nil {
 		return nil, err
 	}
-
 	return &newPestoProject, nil
-}
-
-// // CreatePestoProjectIngredient - Create new PestoProject ingredient
-// func (c *Client) CreatePestoProjectIngredient(PestoProject PestoProject, ingredient Ingredient, authToken *string) (*Ingredient, error) {
-// CreatePestoProjectIngredient - Create new PestoProject ingredient
-func (c *Client) CreatePestoProjectIngredient(PestoProject PestoProject, authToken *string) any {
-	reqBody := struct {
-		PestoProjectID int    `json:"PestoProject_id"`
-		Quantity       int    `json:"quantity"`
-		Unit           string `json:"unit"`
-	}{
-		PestoProjectID: PestoProject.ID,
-	}
-	rb, err := json.Marshal(reqBody)
-	if err != nil {
-		return err
-	}
-
-	req, err := http.NewRequest("POST", fmt.Sprintf("%s/PestoProjects/%d/ingredients", c.HostURL, PestoProject.ID), strings.NewReader(string(rb)))
-	if err != nil {
-		return err
-	}
-
-	body, err := c.doRequest(req, authToken)
-	if err != nil {
-		return err
-	}
-
-	// newIngredient := Ingredient{}
-	// err = json.Unmarshal(body, &newIngredient)
-	// if err != nil {
-	// 	 return err
-	// }
-	var returnedAnswer any
-	err = json.Unmarshal(body, returnedAnswer)
-	if err != nil {
-		return err
-	}
-	return returnedAnswer
 }

@@ -8,7 +8,7 @@ type PestoProject struct {
 	Description          string    `json:"description"`
 	Git_ssh_uri          string    `json:"git_ssh_uri"`
 	Git_service_provider string    `json:"git_service_provider"`
-	Ingredient  []CoffeeIngredient `json:"ingredients"`
+	// Ingredient  []CoffeeIngredient `json:"ingredients"`
 }
 
 //////////////////////////////////////
