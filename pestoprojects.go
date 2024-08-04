@@ -1,8 +1,10 @@
 package pesto
 
 import (
-	"encoding/json"
+	"context"
+	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"fmt"
+	"encoding/json"
 	"net/http"
 	"strings"
 )
@@ -73,7 +75,7 @@ func (c *Client) GetPestoProjectIngredients(PestoProjectID string) ([]Ingredient
 
 */
 // CreatePestoProject - Create new PestoProject
-func (c *Client) CreatePestoProject(project CreatePestoProjectPayload, authToken *string) (*PestoProject, error) {
+func (c *Client) CreatePestoProject(ctx context.Context, project CreatePestoProjectPayload, authToken *string) (*PestoProject, error) {
 	rb, err := json.Marshal(project)
 
 	if err != nil {
@@ -90,7 +92,19 @@ func (c *Client) CreatePestoProject(project CreatePestoProjectPayload, authToken
 		return nil, err
 	}
 
+	tflog.Debug(ctx, fmt.Sprintf("PESTO API CLIENT GO - CREATE PESTO PROJECT - here is the API Response Body returned from Pesto API: %v ", body))
+	
+	var isAPIResponseBodyNil string
+
+	if body != nil {
+		isAPIResponseBodyNil = "NO API Response Body object is not NIL"
+	} else {
+		isAPIResponseBodyNil = "YES API Response Body object is NIL!"
+	}
+	tflog.Debug(ctx, fmt.Sprintf("PESTO API CLIENT GO - CREATE PESTO PROJECT - Is the API Response Body returned from Pesto API NIL ?: %v", isAPIResponseBodyNil))
+	
 	newPestoProject := PestoProject{}
+	
 	err = json.Unmarshal(body, &newPestoProject)
 	if err != nil {
 		return nil, err
