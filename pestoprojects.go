@@ -113,3 +113,45 @@ func (c *Client) CreatePestoProject(ctx context.Context, project CreatePestoProj
 	}
 	return &newPestoProject, nil
 }
+
+
+// UpdatePestoProject - Update new PestoProject
+func (c *Client) UpdatePestoProject(ctx context.Context, project UpdatePestoProjectPayload, authToken *string) (*PestoProject, error) {
+	rb, err := json.Marshal(project)
+
+	if err != nil {
+		return nil, err
+	}
+	tflog.Debug(ctx, fmt.Sprintf("PESTO API CLIENT GO - UPDATE PESTO PROJECT - here is the payload which will be used to Update thePesto Project in the Pesto API: %v ", project))
+	fmt.Printf("PESTO API CLIENT GO - UPDATE PESTO PROJECT - here is the payload which will be used to Update thePesto Project in the Pesto API: %v \n", project)
+	
+	req, err := http.NewRequest("PUT", fmt.Sprintf("%s/pesto-project/%s", c.HostURL, project.ID), strings.NewReader(string(rb)))
+	if err != nil {
+		return nil, err
+	}
+
+	body, err := c.doRequest(req, authToken)
+	if err != nil {
+		return nil, err
+	}
+
+	tflog.Debug(ctx, fmt.Sprintf("PESTO API CLIENT GO - UPDATE PESTO PROJECT - here is the API Response Body returned from Pesto API: %v ", body))
+	fmt.Printf("PESTO API CLIENT GO - UPDATE PESTO PROJECT - here is the API Response Body returned from Pesto API: %v \n", body)
+	var isAPIResponseBodyNil string
+
+	if body != nil {
+		isAPIResponseBodyNil = "NO API Response Body object is not NIL"
+	} else {
+		isAPIResponseBodyNil = "YES API Response Body object is NIL!"
+	}
+	tflog.Debug(ctx, fmt.Sprintf("PESTO API CLIENT GO - UPDATE PESTO PROJECT - Is the API Response Body returned from Pesto API NIL ?: %v", isAPIResponseBodyNil))
+	fmt.Printf("PESTO API CLIENT GO - UPDATE PESTO PROJECT - Is the API Response Body returned from Pesto API NIL ?: %v \n", isAPIResponseBodyNil)
+
+	newPestoProject := PestoProject{}
+
+	err = json.Unmarshal(body, &newPestoProject)
+	if err != nil {
+		return nil, err
+	}
+	return &newPestoProject, nil
+}

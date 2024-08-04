@@ -18,6 +18,14 @@ type CreatePestoProjectPayload struct {
 	Git_service_provider string    `json:"git_service_provider"`
 	// Ingredient  []CoffeeIngredient `json:"ingredients"`
 }
+type UpdatePestoProjectPayload struct {
+	ID                   string    `json:"_id"`
+	Name                 string    `json:"name"`
+	Description          string    `json:"description"`
+	Git_ssh_uri          string    `json:"git_ssh_uri"`
+	Git_service_provider string    `json:"git_service_provider"`
+	// Ingredient  []CoffeeIngredient `json:"ingredients"`
+}
 //////////////////////////////////////
 /// Below are types defined by the original hashicups
 //////////////////////////////////////
