@@ -85,9 +85,19 @@ func (c *Client) doRequest(req *http.Request, authToken *string) ([]byte, error)
 		return nil, err
 	}
 
-	if res.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("status: %d, body: %s", res.StatusCode, body)
-	}
+	pestoApiResponseHttpStatusCode := res.StatusCode
 
+	switch pestoApiResponseHttpStatusCode {
+	case http.StatusOK:
+	 fmt.Println("CLIENT.GO [doRequest] - Pesto API Response HTTP CODE IS: http.StatusOK")
+	case http.StatusFound:
+	 fmt.Println("CLIENT.GO [doRequest] - Pesto API Response HTTP CODE IS: http.StatusFound")
+	case http.StatusCreated:
+	 fmt.Println("CLIENT.GO [doRequest] - Pesto API Response HTTP CODE IS: http.StatusCreated")
+	case http.StatusNoContent:
+	 fmt.Println("CLIENT.GO [doRequest] - Pesto API Response HTTP CODE IS: http.StatusNoContent")
+	default:
+		return nil, fmt.Errorf("CLIENT.GO [doRequest] - ERROR - Pesto API Response HTTP status is: %d, body: %s", res.StatusCode, body)
+	}
 	return body, err
 }
