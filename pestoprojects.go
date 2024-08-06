@@ -3,6 +3,7 @@ package pesto
 import (
 	"context"
 	"encoding/json"
+	// "errors"
 	"fmt"
 	"net/http"
 	"strings"
@@ -154,4 +155,43 @@ func (c *Client) UpdatePestoProject(ctx context.Context, project UpdatePestoProj
 		return nil, err
 	}
 	return &newPestoProject, nil
+}
+
+
+
+// DeletePestoProject - Deletes a Pesto Project
+func (c *Client) DeletePestoProject(ctx context.Context, PestoProjectID string, authToken *string) (*PestoProject, error) {
+	req, err := http.NewRequest("DELETE", fmt.Sprintf("%s/pesto-project/%s", c.HostURL, PestoProjectID), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	body, err := c.doRequest(req, authToken)
+	if err != nil {
+		return nil, err
+	}
+
+	tflog.Debug(ctx, fmt.Sprintf("PESTO API CLIENT GO - DELETE PESTO PROJECT - here is the API Response Body returned from Pesto API: %v ", body))
+	fmt.Printf("PESTO API CLIENT GO - DELETE PESTO PROJECT - here is the API Response Body returned from Pesto API: %v \n", body)
+	var isAPIResponseBodyNil string
+
+	if body != nil {
+		isAPIResponseBodyNil = "NO API Response Body object is not NIL"
+	} else {
+		isAPIResponseBodyNil = "YES API Response Body object is NIL!"
+	}
+	tflog.Debug(ctx, fmt.Sprintf("PESTO API CLIENT GO - DELETE PESTO PROJECT - Is the API Response Body returned from Pesto API NIL ?: %v", isAPIResponseBodyNil))
+	fmt.Printf("PESTO API CLIENT GO - DELETE PESTO PROJECT - Is the API Response Body returned from Pesto API NIL ?: %v \n", isAPIResponseBodyNil)
+
+	// if string(body) != "Deleted order" {
+	// 	return errors.New(string(body))
+	// }
+
+	deletedPestoProject := PestoProject{}
+
+	err = json.Unmarshal(body, &deletedPestoProject)
+	if err != nil {
+		return nil, err
+	}
+	return &deletedPestoProject, nil
 }
