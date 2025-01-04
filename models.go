@@ -1,31 +1,63 @@
 package pesto
 
+//////////////////////////////////////
+/// PestoContentType(s)
+//////////////////////////////////////
+// PestoContentType -
+type PestoContentType struct {
+	ID                     string `json:"_id"`
+	Name                   string `json:"name"`
+	Project_id             string `json:"project_id"`
+	Frontmatter_definition string `json:"frontmatter_definition"`
+	Description            string `json:"description"`
+	// Ingredient  []CoffeeIngredient `json:"ingredients"`
+}
+type CreatePestoContentTypePayload struct {
+	// ID                     string `json:"_id"`
+	Name                   string `json:"name"`
+	Project_id             string `json:"project_id"`
+	Frontmatter_definition string `json:"frontmatter_definition"`
+	Description            string `json:"description"`
+	// Ingredient  []CoffeeIngredient `json:"ingredients"`
+}
+type UpdatePestoContentTypePayload struct {
+	ID                     string `json:"_id"`
+	Name                   string `json:"name"`
+	Project_id             string `json:"project_id"`
+	Frontmatter_definition string `json:"frontmatter_definition"`
+	Description            string `json:"description"`
+	// Ingredient  []CoffeeIngredient `json:"ingredients"`
+}
 
+//////////////////////////////////////
+/// PestoProject(s)
+//////////////////////////////////////
 // PestoProject -
 type PestoProject struct {
-	ID                   string    `json:"_id"`
-	Name                 string    `json:"name"`
-	Description          string    `json:"description"`
-	Git_ssh_uri          string    `json:"git_ssh_uri"`
-	Git_service_provider string    `json:"git_service_provider"`
+	ID                   string `json:"_id"`
+	Name                 string `json:"name"`
+	Description          string `json:"description"`
+	Git_ssh_uri          string `json:"git_ssh_uri"`
+	Git_service_provider string `json:"git_service_provider"`
 	// Ingredient  []CoffeeIngredient `json:"ingredients"`
 }
 type CreatePestoProjectPayload struct {
 	//ID                   string    `json:"_id"`
-	Name                 string    `json:"name"`
-	Description          string    `json:"description"`
-	Git_ssh_uri          string    `json:"git_ssh_uri"`
-	Git_service_provider string    `json:"git_service_provider"`
+	Name                 string `json:"name"`
+	Description          string `json:"description"`
+	Git_ssh_uri          string `json:"git_ssh_uri"`
+	Git_service_provider string `json:"git_service_provider"`
 	// Ingredient  []CoffeeIngredient `json:"ingredients"`
 }
 type UpdatePestoProjectPayload struct {
-	ID                   string    `json:"_id"`
-	Name                 string    `json:"name"`
-	Description          string    `json:"description"`
-	Git_ssh_uri          string    `json:"git_ssh_uri"`
-	Git_service_provider string    `json:"git_service_provider"`
+	ID                   string `json:"_id"`
+	Name                 string `json:"name"`
+	Description          string `json:"description"`
+	Git_ssh_uri          string `json:"git_ssh_uri"`
+	Git_service_provider string `json:"git_service_provider"`
 	// Ingredient  []CoffeeIngredient `json:"ingredients"`
 }
+
 //////////////////////////////////////
 /// Below are types defined by the original hashicups
 //////////////////////////////////////
